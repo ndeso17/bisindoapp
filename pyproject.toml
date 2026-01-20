@@ -1,0 +1,5 @@
+[project]
+name = "bisindoapp"
+version = "1.0.0"
+description = "Aplikasi Bisindo AI"
+requires-python = ">=3.10"
