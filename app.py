@@ -20,7 +20,22 @@ os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 # =====================
 # CAMERA (LSTM)
 # =====================
-camera = cv2.VideoCapture(0)
+camera = None
+
+def get_camera():
+    global camera
+    if camera is None:
+        try:
+            # Menggunakan index -1 atau 0, dan tambahkan CAP_DSHOW jika di windows local
+            # Tapi untuk server linux, cukup 0.
+            # Kita bungkus try-except agar tidak crash saat init
+            cap = cv2.VideoCapture(0)
+            if cap.isOpened():
+                camera = cap
+        except Exception as e:
+            print(f"Warning: Camera init failed: {e}")
+            camera = None
+    return camera
 
 # =====================
 # STATE ML
@@ -90,11 +105,32 @@ def get_bisindo_list():
 
 def generate_frames():
     global latest_lstm_prediction
+    
+    # Placeholder jika kamera mati
+    blank_frame = cv2.imencode('.jpg', 
+        cv2.putText(
+            ((0 * np.ones((480, 640, 3), np.uint8))), 
+            "Camera Not Found", (200, 240), 
+            cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2
+        )[0]
+    )[1].tobytes() if 'cv2' in globals() and 'np' in globals() else b''
+    
     while True:
-        if not camera.isOpened():
+        cap = get_camera()
+        
+        if cap is None or not cap.isOpened():
+            # Jika tidak ada kamera (server), stream black frame/placeholder
+            # Sleep agar tidak membebani CPU
+            cv2.waitKey(1000)
+            yield (
+                b"--frame\r\n"
+                b"Content-Type: image/jpeg\r\n\r\n" +
+                blank_frame +
+                b"\r\n"
+            )
             continue
 
-        success, frame = camera.read()
+        success, frame = cap.read()
         if not success:
             continue
 

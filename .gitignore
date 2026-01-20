@@ -1,5 +1,6 @@
 .env
 .venv
+env3.10
 __pycache__
 BISINDO_FINAL/
 BISINDO_split/
