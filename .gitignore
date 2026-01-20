@@ -1,4 +1,7 @@
 .env
 .venv
 __pycache__
-uploads/
+BISINDO_FINAL/
+BISINDO_split/
+BISINDO_split_aug/
+dataset_balanced/
