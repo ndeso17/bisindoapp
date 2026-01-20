@@ -1,0 +1,5 @@
+.env
+.venv
+Citra_BISINDO/
+__pycache__
+uploads/
