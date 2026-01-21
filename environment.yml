@@ -1,0 +1,5 @@
+name: bisindo-env
+dependencies:
+  - python=3.10
+  - pip
+  - # Add other required packages
