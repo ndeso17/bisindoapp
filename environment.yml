@@ -2,4 +2,13 @@ name: bisindo-env
 dependencies:
   - python=3.10
   - pip
-  - # Add other required packages
+  - numpy==1.26.4
+  - opencv-python-headless==4.9.0.80
+  - tensorflow-cpu==2.15.0
+  - keras==2.15.0
+  - pillow==10.3.0
+  - imutils==0.5.4
+  - mediapipe==0.10.11
+  - pytz==2024.1
+  - Flask==3.0.3
+  - gunicorn==22.0.0
