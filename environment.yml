@@ -1,14 +1,20 @@
 name: bisindo-env
+
+channels:
+  - defaults
+
 dependencies:
   - python=3.10
   - pip
-  - numpy==1.26.4
-  - opencv-python-headless==4.9.0.80
-  - tensorflow-cpu==2.15.0
-  - keras==2.15.0
-  - pillow==10.3.0
-  - imutils==0.5.4
-  - mediapipe==0.10.11
-  - pytz==2024.1
-  - Flask==3.0.3
-  - gunicorn==22.0.0
+  - numpy=1.26.4
+  - pillow=10.3.0
+  - pytz=2024.1
+
+  - pip:
+      - opencv-python-headless==4.9.0.80
+      - tensorflow-cpu==2.15.0
+      - keras==2.15.0
+      - imutils==0.5.4
+      - mediapipe==0.10.11
+      - Flask==3.0.3
+      - gunicorn==22.0.0
