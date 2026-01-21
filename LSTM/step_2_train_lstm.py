@@ -68,7 +68,7 @@ model.compile(
 )
 
 model.summary()
-=
+
 callbacks = [
     EarlyStopping(monitor="val_loss", patience=8, restore_best_weights=True),
     ModelCheckpoint(MODEL_PATH, monitor="val_accuracy", save_best_only=True)
